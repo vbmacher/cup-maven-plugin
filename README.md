@@ -8,7 +8,7 @@ To use it, put following structure into `plugins` element inside your POM file:
 <plugin>
   <groupId>edu.tum.cs</groupId>
   <artifactId>cup-maven-plugin</artifactId>
-  <version>0.11a</version>
+  <version>1.0.0</version>
   <executions>
     <execution>
       <goals>
