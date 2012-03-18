@@ -58,7 +58,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>cup</groupId>
+      <groupId>net.sf.squirrel-sql.thirdparty-non-maven</groupId>
       <artifactId>java-cup</artifactId>
       <version>0.11a</version>
     </dependency>
