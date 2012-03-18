@@ -1,7 +1,7 @@
 Java cup Maven plug-in
 ======================
 
-This project represents a plug-in acting as a wapper for Java cup LR parser. I couldn't find any Maven 3 plug-in for this parser, so I created one.
+This project represents a plug-in acting as a wapper for [Java cup](http://www2.cs.tum.edu/projects/cup/) LR parser. I couldn't find any Maven 3 plug-in for this parser, so I created one.
 To use it, put following structure into `plugins` element inside your POM file:
 
 ```
