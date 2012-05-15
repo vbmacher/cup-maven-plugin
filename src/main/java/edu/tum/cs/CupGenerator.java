@@ -69,7 +69,7 @@ public class CupGenerator extends AbstractMojo {
      * By default, a `parser.cup` file in <code>src/main/cup</code> will be
      * processed.
      *
-     * @parameter default-value="parser.cup"
+     * @parameter 
      * @editable
      */
     private java.io.File cupDefinition;
