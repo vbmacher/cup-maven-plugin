@@ -23,6 +23,8 @@ To use it, put following structure into `plugins` element inside your POM file:
 </plugin>
 ```
 
+[![Build Status](https://travis-ci.org/vbmacher/cup-maven-plugin.png)](https://travis-ci.org/vbmacher/cup-maven-plugin)
+
 Parameters in configuration
 ---------------------------
 
