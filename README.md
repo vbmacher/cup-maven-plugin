@@ -1,5 +1,7 @@
 Java cup Maven plug-in
 ======================
+[![Build Status](https://travis-ci.org/vbmacher/cup-maven-plugin.png)](https://travis-ci.org/vbmacher/cup-maven-plugin)
+[![Coverage Status](https://coveralls.io/repos/vbmacher/cup-maven-plugin/badge.png?branch=master)](https://coveralls.io/r/vbmacher/cup-maven-plugin?branch=master)
 
 This project represents a plug-in acting as a wapper for [Java cup](http://www2.cs.tum.edu/projects/cup/) LR parser. I couldn't find any Maven 3 plug-in for this parser, so I created one.
 To use it, put following structure into `plugins` element inside your POM file:
@@ -22,8 +24,6 @@ To use it, put following structure into `plugins` element inside your POM file:
   </configuration>
 </plugin>
 ```
-
-[![Build Status](https://travis-ci.org/vbmacher/cup-maven-plugin.png)](https://travis-ci.org/vbmacher/cup-maven-plugin)
 
 Parameters in configuration
 ---------------------------
