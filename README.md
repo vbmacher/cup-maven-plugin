@@ -4,7 +4,25 @@ Java cup Maven plug-in
 [![Coverage Status](https://coveralls.io/repos/vbmacher/cup-maven-plugin/badge.png?branch=master)](https://coveralls.io/r/vbmacher/cup-maven-plugin?branch=master)
 
 This project represents a plug-in acting as a wrapper for the [Java cup](http://www2.cs.tum.edu/projects/cup/) LR parser generator. I couldn't find any Maven 3 plug-in for this parser, so I created one.
-To use it, put the following structure into `plugins` element inside your POM file:
+
+Usage
+-----
+To use this plugin, you will first have to tell Maven where to find it, since it is not uploaded to the standard repositories. To do so, add the following to your `pom.xml`
+
+```
+<pluginRepositories>
+  <pluginRepository>
+    <id>emustudio-repository</id>
+    <name>emuStudio Repository</name>
+    <url>http://emustudio.sf.net/repository/</url>
+    <snapshots>
+      <enabled>true</enabled>
+    </snapshots>
+  </pluginRepository>
+</pluginRepositories>
+```
+
+You will also have to tell Maven to execute the plugin at some point during the build process. To do so, add the following to the plugins-section of your `pom.xml`.
 
 ```
 <plugin>
@@ -24,6 +42,8 @@ To use it, put the following structure into `plugins` element inside your POM fi
   </configuration>
 </plugin>
 ```
+
+By default the plugin is called during the generate-sources phase of the [build lifecycle](http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html).
 
 Parameters in configuration
 ---------------------------
