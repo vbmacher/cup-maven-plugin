@@ -3,8 +3,8 @@ Java cup Maven plug-in
 [![Build Status](https://travis-ci.org/vbmacher/cup-maven-plugin.png)](https://travis-ci.org/vbmacher/cup-maven-plugin)
 [![Coverage Status](https://coveralls.io/repos/vbmacher/cup-maven-plugin/badge.png?branch=master)](https://coveralls.io/r/vbmacher/cup-maven-plugin?branch=master)
 
-This project represents a plug-in acting as a wapper for [Java cup](http://www2.cs.tum.edu/projects/cup/) LR parser. I couldn't find any Maven 3 plug-in for this parser, so I created one.
-To use it, put following structure into `plugins` element inside your POM file:
+This project represents a plug-in acting as a wrapper for the [Java cup](http://www2.cs.tum.edu/projects/cup/) LR parser generator. I couldn't find any Maven 3 plug-in for this parser, so I created one.
+To use it, put the following structure into `plugins` element inside your POM file:
 
 ```
 <plugin>
@@ -28,7 +28,7 @@ To use it, put following structure into `plugins` element inside your POM file:
 Parameters in configuration
 ---------------------------
 
-The plug-in accepts many input parameters. Each parameter is passed inside `<configuration>` element. Most of the parameters are just forwarded to Java cup parser. List of available parameters follows:
+The plug-in accepts many input parameters. Each parameter is passed inside the `<configuration>` element. Most of the parameters are just forwarded to Java cup parser. A List of the available parameters follows:
 
 * `<backup>false</backup>` - A flag whether to enable the generation of a backup copy, if the generated source file already exists. Defaultly is set
   to false.
