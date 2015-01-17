@@ -45,6 +45,8 @@ You will also have to tell Maven to execute the plugin at some point during the 
 
 By default the plugin is called during the generate-sources phase of the [build lifecycle](http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html).
 
+Note that cup-generated parsers need a runtime-library to run. This is not provided by this plugin. There are, however, [several libraries](https://maven-repository.com/search?q=cup) out there that should do just that.
+
 Parameters in configuration
 ---------------------------
 
