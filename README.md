@@ -3,8 +3,26 @@ Java cup Maven plug-in
 [![Build Status](https://travis-ci.org/vbmacher/cup-maven-plugin.png)](https://travis-ci.org/vbmacher/cup-maven-plugin)
 [![Coverage Status](https://coveralls.io/repos/vbmacher/cup-maven-plugin/badge.png?branch=master)](https://coveralls.io/r/vbmacher/cup-maven-plugin?branch=master)
 
-This project represents a plug-in acting as a wapper for [Java cup](http://www2.cs.tum.edu/projects/cup/) LR parser. I couldn't find any Maven 3 plug-in for this parser, so I created one.
-To use it, put following structure into `plugins` element inside your POM file:
+This project represents a plug-in acting as a wrapper for the [Java cup](http://www2.cs.tum.edu/projects/cup/) LR parser generator. I couldn't find any Maven 3 plug-in for this parser, so I created one.
+
+Usage
+-----
+To use this plugin, you will first have to tell Maven where to find it, since it is not uploaded to the standard repositories. To do so, add the following to your `pom.xml`
+
+```
+<pluginRepositories>
+  <pluginRepository>
+    <id>emustudio-repository</id>
+    <name>emuStudio Repository</name>
+    <url>http://emustudio.sf.net/repository/</url>
+    <snapshots>
+      <enabled>true</enabled>
+    </snapshots>
+  </pluginRepository>
+</pluginRepositories>
+```
+
+You will also have to tell Maven to execute the plugin at some point during the build process. To do so, add the following to the plugins-section of your `pom.xml`.
 
 ```
 <plugin>
@@ -25,10 +43,14 @@ To use it, put following structure into `plugins` element inside your POM file:
 </plugin>
 ```
 
+By default the plugin is called during the generate-sources phase of the [build lifecycle](http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html).
+
+Note that cup-generated parsers need a runtime-library to run. This is not provided by this plugin. There are, however, [several libraries](https://maven-repository.com/search?q=cup) out there that should do just that.
+
 Parameters in configuration
 ---------------------------
 
-The plug-in accepts many input parameters. Each parameter is passed inside `<configuration>` element. Most of the parameters are just forwarded to Java cup parser. List of available parameters follows:
+The plug-in accepts many input parameters. Each parameter is passed inside the `<configuration>` element. Most of the parameters are just forwarded to Java cup parser. A List of the available parameters follows:
 
 * `<backup>false</backup>` - A flag whether to enable the generation of a backup copy, if the generated source file already exists. Defaultly is set
   to false.
