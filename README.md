@@ -46,9 +46,9 @@ In order to use it, you must add a dependency to your `pom.xml`:
 ```
 <dependency>
   <groupId>nz.ac.waikato.cms.weka.thirdparty</groupId>
-  <artifactId>java-cup-11b</artifactId>
+  <artifactId>java-cup-11b-runtime</artifactId>
   <version>2015.03.26</version>
-</dependency>   
+</dependency>
 ```
 
 NOTE: There might be, however, [several libraries](https://maven-repository.com/search?q=cup) out there
