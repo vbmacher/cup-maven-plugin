@@ -1,12 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>edu.tum.cs</groupId>
+  <groupId>com.github.vbmacher</groupId>
   <artifactId>cup-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
   <version>1.0.0</version>
+
   <name>Java cup Maven Plugin</name>
+  <description>Maven plug-in for executing Java CUP library</description>
   <url>https://github.com/vbmacher/cup-maven-plugin</url>
 
   <licenses>
@@ -17,62 +19,86 @@
     </license>
   </licenses>
 
+  <developers>
+    <developer>
+      <name>Peter Jakubčo</name>
+      <url>https://github.com/vbmacher</url>
+      <timezone>Europe/Prague</timezone>
+    </developer>
+  </developers>
+
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/vbmacher/cup-maven-plugin/issues</url>
+  </issueManagement>
+
+  <scm>
+    <url>https://github.com/vbmacher/cup-maven-plugin</url>
+  </scm>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <netbeans.hint.license>gpl20</netbeans.hint.license>
   </properties>
 
-  <profiles>
-    <profile>
-      <id>coveralls</id>
-      <activation>
-        <property>
-          <name>env.TRAVIS</name>
-          <value>true</value>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>cobertura-maven-plugin</artifactId>
-            <version>2.6</version>
-            <configuration>
-              <format>xml</format>
-              <maxmem>256m</maxmem>
-              <aggregate>true</aggregate>
-            </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.eluder.coveralls</groupId>
-            <artifactId>coveralls-maven-plugin</artifactId>
-            <version>2.2.0</version>
-            <configuration>
-              <serviceName>travis-ci</serviceName>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
-
   <build>
-    <extensions>
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-        <artifactId>wagon-ssh</artifactId>
-        <version>2.6</version>
-      </extension>
-    </extensions>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
+        <version>3.3</version>
         <configuration>
           <source>1.7</source>
           <target>1.7</target>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.4</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.10.3</version>
+        <configuration>
+          <links>
+            <link>http://docs.oracle.com/javase/7/docs/api/</link>
+          </links>
+          <tags>
+            <tag>
+              <name>goal</name>
+              <placement>a</placement>
+              <head>Goal:</head>
+            </tag>
+            <tag>
+              <name>requiresProject</name>
+              <placement>a</placement>
+              <head>Requires Project:</head>
+            </tag>
+            <tag>
+              <name>phase</name>
+              <placement>a</placement>
+              <head>Phase:</head>
+            </tag>
+          </tags>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
@@ -81,46 +107,33 @@
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-plugin-api</artifactId>
-      <version>2.0</version>
+      <version>3.3.3</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-artifact</artifactId>
       <type>jar</type>
-      <version>3.0.3</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.10</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>net.sf.squirrel-sql.thirdparty-non-maven</groupId>
-      <artifactId>java-cup</artifactId>
-      <version>0.11a</version>
+      <version>3.3.3</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-project</artifactId>
-      <version>2.0.4</version>
+      <version>2.2.1</version>
     </dependency>
+
+    <dependency>
+      <groupId>nz.ac.waikato.cms.weka.thirdparty</groupId>
+      <artifactId>java-cup-11b</artifactId>
+      <version>2015.03.26</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
-
-  <repositories>
-    <repository>
-      <id>emustudio-repository</id>
-      <name>emuStudio Repository</name>
-      <url>http://emustudio.sf.net/repository/</url>
-    </repository>
-  </repositories>
-
-    <distributionManagement>
-      <repository>
-        <id>emustudio-repository</id>
-        <name>emuStudio Repository</name>
-        <url>sftp://web.sourceforge.net:/home/project-web/emustudio/htdocs/repository</url>
-      </repository>
-    </distributionManagement>
 
 </project>

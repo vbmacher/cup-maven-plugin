@@ -1,22 +1,3 @@
 language: java
 jdk:
 - oraclejdk7
-env:
-  global:
-  - secure: |-
-      Y1FahevsOdNByvUJNuktkwOzE8c3j3UB8ZmN5Vx1rxzbAJZRJ0dL0taVwypZ
-      gRjITG9izXqs1i6V+M6SI0xpfPMIG8IOPVQa1cxRJT0ayIXu332u2w5fEG8Q
-      f0e0H9uSUNQ8ZucxgGCpUHFp6fnNYqHCmhxYLFIiHMleZaewFAo=
-  - secure: |-
-      Cs4nWc6DfJOh8be9vXKRUjTVz1qFSJ7M3PWIsIpwjZCdu3p1lOD8SXWOfsmF
-      ShTfABc8sSuxwIcLjcOCKPyn5zv8SxYKgb7fds3X5up7Sk7/GtON5SSEggbL
-      bbOT8nU3WN72dszONPg0LZCJxqjMK4NrOL9/x+0Sg/47HlA2jFo=
-  - secure: |-
-      YGWD5e16Vip9is0Pur6IYlJ4uist61Fdbcq5co0KkzklhFKyB7e8I4id+0Ud
-      vk5y9BR8vx/uXa8KNxcyu1NWxdjYJTSnTM0MH0dCr2s430SkwTUjl2SaPbGb
-      CIhTqx5LlHV87NkBsmHx9XzfftZSXUcvU4bgndKWHv0I161/k/s=
-after_success:
-- mvn -Pcoveralls cobertura:cobertura coveralls:cobertura
-- python add_server.py
-- mvn deploy
-- python restore_backups.py

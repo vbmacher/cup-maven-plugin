@@ -1,6 +1,4 @@
 /*
- * CupAnalyzer.java
- * 
  * Copyright (c) 2012, Peter Jakubčo <pjakubco@gmail.com>
  *
  * KISS, DRY, YAGNI
@@ -19,7 +17,7 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package edu.tum.cs;
+package com.github.vbmacher.cup;
 
 import java_cup.Main;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -35,9 +33,12 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 
-public class CupAnalyzer {
+/**
+ * Wrapper for calling CUP.
+ */
+public class CupParserGenerator {
     private static final String PACKAGE = "package";
-    public static final String CLASS = "class";
+    private static final String CLASS = "class";
 
     private final Log log;
     private final CupParameters cupParameters;
@@ -52,12 +53,23 @@ public class CupAnalyzer {
         }
     }
 
-    public CupAnalyzer(Log log, CupParameters cupParameters) {
+    /**
+     * Creates new instance.
+     *
+     * @param log Maven plug-in logger
+     * @param cupParameters Parameters used for CUP parser generation
+     */
+    public CupParserGenerator(Log log, CupParameters cupParameters) {
         this.log = Objects.requireNonNull(log);
         this.cupParameters = Objects.requireNonNull(cupParameters);
         this.cupDefinition = cupParameters.getCupDefinition();
     }
 
+    /**
+     * Generate parser(s) using CUP library.
+     *
+     * @throws MojoExecutionException When something goes wrong
+     */
     public void process() throws MojoExecutionException {
         if (cupDefinition.isDirectory()) {
             parseCupDirectory();
@@ -176,8 +188,9 @@ public class CupAnalyzer {
 
     private void verifyParameters(File cupFile, String packageName, String className) throws MojoExecutionException {
         if (cupFile == null) {
-            throw new MojoExecutionException("<cupDefinition> is empty. Please define input file with " +
-                    "<cupDefinition>input.cup</cupDefinition>");
+            throw new MojoExecutionException(
+                    "<cupDefinition> is empty. Please define input file with <cupDefinition>input.cup</cupDefinition>"
+            );
         }
         if (!cupFile.isFile()) {
             throw new MojoExecutionException("Input file does not exist: " + cupFile.getAbsolutePath());

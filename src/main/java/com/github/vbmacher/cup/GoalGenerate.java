@@ -19,14 +19,15 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package edu.tum.cs;
+package com.github.vbmacher.cup;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Goal which generates java files from cup files.
@@ -35,7 +36,7 @@ import java.io.File;
  * @requiresProject true
  * @phase generate-sources
  */
-public class CupGenerator extends AbstractMojo {
+public class GoalGenerate extends AbstractMojo implements CupParameters {
     public static final String DEFAULT_CUP_DIR = "src/main/cup";
 
     /**
@@ -83,7 +84,7 @@ public class CupGenerator extends AbstractMojo {
     private File outputDirectory;
 
     /**
-     * @parameter expression="${project}"
+     * @parameter property="project"
      * @required
      */
     private MavenProject project;
@@ -204,13 +205,18 @@ public class CupGenerator extends AbstractMojo {
      * The granularity in milliseconds of the last modification date for testing
      * whether a source needs regeneration.
      *
-     * @parameter expression="${lastModGranularityMs}"
+     * @parameter property="lastModGranularityMs"
      * @editable
      */
     private int staleMillis;
 
+    /**
+     * Executer the "generate" goal.
+     *
+     * @throws MojoExecutionException if any error occurs during parser generation
+     */
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    public void execute() throws MojoExecutionException {
         String projectAbsolutePath = project.getBasedir().getAbsolutePath();
         if (outputDirectory != null && !outputDirectory.isAbsolute()) {
             // Handle relative paths
@@ -222,89 +228,110 @@ public class CupGenerator extends AbstractMojo {
             cupDefinition = new File(projectAbsolutePath, DEFAULT_CUP_DIR + "/parser.cup");
         }
 
-        CupParameters cupParameters = CupParameters.loadFrom(this);
-        CupAnalyzer cupAnalyzer = new CupAnalyzer(getLog(), cupParameters);
-
-        cupAnalyzer.process();
+        CupParserGenerator cupParserGenerator = new CupParserGenerator(getLog(), this);
+        cupParserGenerator.process();
     }
 
-    public boolean isSymbolsInterface() {
-        return symbolsInterface;
-    }
-
+    @Override
     public File getCupDefinition() {
         return cupDefinition;
     }
 
+    @Override
     public String getClassName() {
         return className;
     }
 
+    @Override
     public String getSymbolsName() {
         return symbolsName;
     }
 
+    @Override
     public File getOutputDirectory() {
         return outputDirectory;
     }
 
+    @Override
     public String getPackageName() {
         return packageName;
     }
 
-    public boolean isDumpGrammar() {
-        return dumpGrammar;
-    }
-
-    public boolean isDumpStates() {
-        return dumpStates;
-    }
-
-    public boolean isDumpTables() {
-        return dumpTables;
-    }
-
-    public boolean isTime() {
-        return time;
-    }
-
-    public boolean isProgress() {
-        return progress;
-    }
-
-    public boolean isNoScanner() {
-        return noScanner;
-    }
-
-    public boolean isNoPositions() {
-        return noPositions;
-    }
-
-    public boolean isNoSummary() {
-        return noSummary;
-    }
-
-    public boolean isNoWarn() {
-        return noWarn;
-    }
-
-    public boolean isCompactRed() {
-        return compactRed;
-    }
-
-    public int getExpectedConflicts() {
-        return expectedConflicts;
-    }
-
-    public boolean isNontermsToSymbols() {
-        return nontermsToSymbols;
-    }
-
-    public String getTypeArgs() {
-        return typeArgs;
-    }
-
+    @Override
     public int getStaleMillis() {
         return staleMillis;
     }
+
+    @Override
+    public List<String> prepareCommandLine(File cupFile, File generatedFile) {
+        List<String> params = new ArrayList<>();
+
+        if (packageName != null) {
+            params.add("-package");
+            params.add(packageName);
+        }
+        if (className != null) {
+            params.add("-parser");
+            params.add(className);
+        }
+        if (symbolsName != null) {
+            params.add("-symbols");
+            params.add(symbolsName);
+        }
+        if (symbolsInterface) {
+            params.add("-interface");
+        }
+        if (dumpGrammar) {
+            params.add("-dump_grammar");
+        }
+        if (dumpStates) {
+            params.add("-dump_states");
+        }
+        if (dumpTables) {
+            params.add("-dump_tables");
+        }
+        if (time) {
+            params.add("-time");
+        }
+        if (nontermsToSymbols) {
+            params.add("-nonterms");
+        }
+        if (compactRed) {
+            params.add("-compact_red");
+        }
+        if (noWarn) {
+            params.add("-nowarn");
+        }
+        if (noSummary) {
+            params.add("-nosummary");
+        }
+        if (progress) {
+            params.add("-progress");
+        }
+        if (noPositions) {
+            params.add("-nopositions");
+        }
+        if (noScanner) {
+            params.add("-noscanner");
+        }
+        if (expectedConflicts > 0) {
+            params.add("-expect");
+            params.add(String.valueOf(expectedConflicts));
+        }
+        if (typeArgs != null) {
+            params.add("-typearg");
+            params.add(typeArgs);
+        }
+        params.add("-destdir");
+        File dir = generatedFile.getParentFile();
+
+        if (dir != null) {
+            params.add(dir.getAbsolutePath());
+        } else {
+            params.add(outputDirectory.getAbsolutePath());
+        }
+        params.add(cupFile.getAbsolutePath());
+        return params;
+    }
+
 }

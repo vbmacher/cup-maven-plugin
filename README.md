@@ -1,32 +1,18 @@
 Java cup Maven plug-in
 ======================
 [![Build Status](https://travis-ci.org/vbmacher/cup-maven-plugin.png)](https://travis-ci.org/vbmacher/cup-maven-plugin)
-[![Coverage Status](https://coveralls.io/repos/vbmacher/cup-maven-plugin/badge.png?branch=master)](https://coveralls.io/r/vbmacher/cup-maven-plugin?branch=master)
 
-This project represents a plug-in acting as a wrapper for the [Java cup](http://www2.cs.tum.edu/projects/cup/) LR parser generator. I couldn't find any Maven 3 plug-in for this parser, so I created one.
+This project represents a plug-in acting as a wrapper for the [Java cup](http://www2.cs.tum.edu/projects/cup/) LR parser
+generator. I couldn't find any Maven 3 plug-in for this parser, so I created one.
 
 Usage
 -----
-To use this plugin, you will first have to tell Maven where to find it, since it is not uploaded to the standard repositories. To do so, add the following to your `pom.xml`
-
-```
-<pluginRepositories>
-  <pluginRepository>
-    <id>emustudio-repository</id>
-    <name>emuStudio Repository</name>
-    <url>http://emustudio.sf.net/repository/</url>
-    <snapshots>
-      <enabled>true</enabled>
-    </snapshots>
-  </pluginRepository>
-</pluginRepositories>
-```
-
-You will also have to tell Maven to execute the plugin at some point during the build process. To do so, add the following to the plugins-section of your `pom.xml`.
+To use this plugin, you will have to tell Maven to execute the plugin at some point during the build process. 
+To do so, add the following to the plugins-section of your `pom.xml`.
 
 ```
 <plugin>
-  <groupId>edu.tum.cs</groupId>
+  <groupId>com.github.vbmacher</groupId>
   <artifactId>cup-maven-plugin</artifactId>
   <version>1.0.0</version>
   <executions>
@@ -43,9 +29,31 @@ You will also have to tell Maven to execute the plugin at some point during the 
 </plugin>
 ```
 
-By default the plugin is called during the generate-sources phase of the [build lifecycle](http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html).
+By default the plugin is called during the generate-sources phase of the
+[build lifecycle](http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html).
 
-Note that cup-generated parsers need a runtime-library to run. This is not provided by this plugin. There are, however, [several libraries](https://maven-repository.com/search?q=cup) out there that should do just that.
+Run-time library
+----------------
+
+CUP-generated parsers need a runtime-library to run. This is not provided by this plugin. The run-time library version
+of Java cup library must correspond to version which the plug-in is using for parser generation.
+
+Currently, the plug-in uses for generation CUP version 0.11b, as it is available at the mentioned
+[link](http://www2.cs.tum.edu/projects/cup/). 
+      
+In order to use it, you must add a dependency to your `pom.xml`:
+       
+```
+<dependency>
+  <groupId>nz.ac.waikato.cms.weka.thirdparty</groupId>
+  <artifactId>java-cup-11b</artifactId>
+  <version>2015.03.26</version>
+</dependency>   
+```
+
+NOTE: There might be, however, [several libraries](https://maven-repository.com/search?q=cup) out there
+      that should do just that. You are not bound with this specific dependency, but you must take care about
+      the CUP version.
 
 Parameters in configuration
 ---------------------------
