@@ -12,6 +12,7 @@
   <groupId>com.github.vbmacher</groupId>
   <artifactId>java-cup-runtime</artifactId>
   <version>11b</version>
+  <packaging>jar</packaging>
 
   <name>Java CUP Runtime Maven Package</name>
   <description>Repackaged java-cup-11b-runtime.jar</description>
@@ -52,6 +53,23 @@
             <goals>
               <goal>run</goal>
             </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>empty-javadoc-jar</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <classifier>javadoc</classifier>
+              <classesDirectory>${basedir}/javadoc</classesDirectory>
+            </configuration>
           </execution>
         </executions>
       </plugin>
