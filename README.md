@@ -14,7 +14,7 @@ To do so, add the following to the plugins-section of your `pom.xml`.
 <plugin>
   <groupId>com.github.vbmacher</groupId>
   <artifactId>cup-maven-plugin</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <executions>
     <execution>
       <goals>
@@ -35,19 +35,23 @@ By default the plugin is called during the generate-sources phase of the
 Run-time library
 ----------------
 
-CUP-generated parsers need a runtime-library to run. This is not provided by this plugin. The run-time library version
-of Java cup library must correspond to version which the plug-in is using for parser generation.
+CUP-generated parsers need a runtime-library to run. There are no (reliable) third party bundles
+for latest CUP (version 11b), so I have repackaged original jars into Maven bundles.  
+    
+You can find the run-time library and also the engine in the subdirectories inside this repository.
 
-Currently, the plug-in uses for generation CUP version 0.11b, as it is available at the mentioned
-[link](http://www2.cs.tum.edu/projects/cup/). 
+The run-time library version of Java CUP library must correspond to version which the plug-in is
+using for parser generation.
+
+Currently, the plug-in uses for generation [CUP version 0.11b](http://www2.cs.tum.edu/projects/cup/). 
       
 In order to use it, you must add a dependency to your `pom.xml`:
        
 ```
 <dependency>
-  <groupId>nz.ac.waikato.cms.weka.thirdparty</groupId>
-  <artifactId>java-cup-11b-runtime</artifactId>
-  <version>2015.03.26</version>
+  <groupId>com.github.vbmacher</groupId>
+  <artifactId>java-cup-runtime</artifactId>
+  <version>11b</version>
 </dependency>
 ```
 
@@ -58,32 +62,43 @@ NOTE: There might be, however, [several libraries](https://maven-repository.com/
 Parameters in configuration
 ---------------------------
 
-The plug-in accepts many input parameters. Each parameter is passed inside the `<configuration>` element. Most of the parameters are just forwarded to Java cup parser. A List of the available parameters follows:
+The plug-in accepts many input parameters. Each parameter is passed inside the `<configuration>` element.
+Most of the parameters are just forwarded to Java cup parser.
 
-* `<backup>false</backup>` - A flag whether to enable the generation of a backup copy, if the generated source file already exists. Defaultly is set
+Plugin-specific parameters:
+
+* `<backup>false</backup>` - A flag whether to enable the generation of a backup copy, if the generated source file already exists. By default it is set
   to false.
-* `<symbolsInterface>true</symbolsInterface>` - A flag whether to output the symbol constant code as an interface rather than as a class. Defaultly
-  is set to true.
 * `<cupDefinition>parser.cup</cupDefinition>` - Grammar definition to run the cup parser generator on. By default, a `parser.cup` file in
   `src/main/cup` will be processed.
-* `<className>parser</className>` - Parser class name. Defaultly is set to `parser`.
-* `<symbolsName>sym</symbolsName>` - Symbol class name. Defaultly is set to `sym`.
 * `<outputDirectory>${project.build.directory}/generated-sources/cup</outputDirectory>` - Name of the directory into which cup should generate
    the parser.
-* `<packageName></packageName>` - Package name. By default, package name is empty.
-* `<dumpGrammar>false</dumpGrammar>` - Produce a human readable dump of the symbols and grammar. Defaultly is set to false.
-* `<dumpStates>false</dumpStates>` - Produce a dump of parse state machine. Defaultly is set to false.
-* `<dumpTables>false</dumpTables>` - Produce a dump of the parse tables. Defaultly is set to false.
-* `<time>false</time>` - Print time usage summary. Defaultly is set to false.
-* `<progress>false</progress>` - Print messages to indicate progress of the system. Defaultly is set to false.
-* `<noScanner>false</noScanner>` - Don't refer to `java_cup.runtime.Scanner`. Defaultly is set to false.
-* `<noPositions>false</noPositions>` - Don't propagate the left and right token position values. Defaultly is set to false.
-* `<noSummary>true</noSummary>` - Don't print the usual summary of parse states, etc. Defaultly is set to true.
-* `<noWarn>false</noWarn>` - Don't warn about useless productions, etc. Defaultly is set to false.
-* `<compactRed>false</compactRed>` - Compact tables by defaulting to most frequent reduce. Defaultly is set to false.
-* `<expectedConflicts>0</expectedConflicts>` - Number of conflicts expected/allowed. Defaultly it is 0.
-* `<nontermsToSymbols>false</nontermsToSymbols>` - Put non terminals in symbol constant class. Defaultly is set to false.
-* `<typeArgs></typeArgs>` - Specify type arguments for parser class. By default, it is empty.
 * `<staleMillis>${lastModGranularityMs}</staleMillis>` - The granularity in milliseconds of the last modification date for testing
   whether a source needs regeneration.
+
+CUP-specific parameters:
+
+* `<className>parser</className>` - Parser class name.
+* `<symbolsName>sym</symbolsName>` - Symbol class name.
+* `<packageName></packageName>` - Package name. By default, package name is empty.
+* `<symbolsInterface>true</symbolsInterface>` - A flag whether to output the symbol constant code as an interface rather
+                                                than as a class.
+* `<typeArgs></typeArgs>` - Specify type arguments for parser class. By default, it is empty.
+* `<nontermsToSymbols>false</nontermsToSymbols>` - Put non terminals in symbol constant class.
+* `<expectedConflicts>0</expectedConflicts>` - Number of conflicts expected/allowed.
+* `<compactRed>false</compactRed>` - Compact tables by defaulting to most frequent reduce.
+* `<noWarn>false</noWarn>` - Don't warn about useless productions, etc.
+* `<noSummary>true</noSummary>` - Don't print the usual summary of parse states, etc.
+* `<progress>false</progress>` - Print messages to indicate progress of the system.
+* `<dumpGrammar>false</dumpGrammar>` - Produce a human readable dump of the symbols and grammar.
+* `<dumpStates>false</dumpStates>` - Produce a dump of parse state machine.
+* `<dumpTables>false</dumpTables>` - Produce a dump of the parse tables.
+* `<time>false</time>` - Print time usage summary.
+* `<debug>false</debug>` - Produces voluminous internal debugging information about the system as it runs.
+* `<noPositions>false</noPositions>` - Don't propagate the left and right token position values.
+* `<noScanner>false</noScanner>` - Don't refer to `java_cup.runtime.Scanner`.
+* `<locations>false</locations>` - Makes CUP generate xleft/xright handles for accessing Location objects for symbol start/end inside actions.
+* `<xmlActions>false</xmlActions>` - Makes CUP generate generic actions that produce XMLElement-objects for any symbol, that is labeled by the CUP spec author.
+* `<genericLabels>false</genericLabels>` - This option goes one step further then `<xmlActions/>` by producing the full parse
+                                           tree as XMLElement-tree.
 

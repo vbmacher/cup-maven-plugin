@@ -1,31 +1,18 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<!--suppress MavenModelInspection -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.github.vbmacher</groupId>
-  <artifactId>cup-maven-plugin</artifactId>
-  <packaging>maven-plugin</packaging>
-  <version>1.0.0</version>
+  <artifactId>java-cup-parent</artifactId>
+  <version>1.0.1</version>
+  <packaging>pom</packaging>
 
-  <name>Java cup Maven Plugin</name>
-  <description>Maven plug-in for executing Java CUP library</description>
+  <name>Java CUP Parent</name>
   <url>https://github.com/vbmacher/cup-maven-plugin</url>
-
-  <licenses>
-    <license>
-      <name>GPL 2</name>
-      <url>http://www.gnu.org/licenses/gpl2.html</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-
-  <developers>
-    <developer>
-      <name>Peter Jakubčo</name>
-      <url>https://github.com/vbmacher</url>
-      <timezone>Europe/Prague</timezone>
-    </developer>
-  </developers>
+  <description>Maven packages of Java CUP, including maven plugin</description>
 
   <issueManagement>
     <system>GitHub</system>
@@ -40,7 +27,38 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <netbeans.hint.license>gpl20</netbeans.hint.license>
     <gpg.keyname>9D040841</gpg.keyname>
+    <compiler.source>1.8</compiler.source>
+    <compiler.target>1.8</compiler.target>
   </properties>
+
+  <licenses>
+    <license>
+      <name>GNU GPL 2</name>
+      <url>http://www.gnu.org/licenses/gpl-2.0.txt</url>
+      <distribution>manual</distribution>
+      <comments>Free software license</comments>
+    </license>
+    <license>
+      <name>CUP Parser Generator Copyright Notice, License, and Disclaimer</name>
+      <url>http://www2.cs.tum.edu/projects/cup/install.php</url>
+      <distribution>manual</distribution>
+      <comments>GPL-compatible open-source license</comments>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Peter Jakubčo</name>
+      <url>https://github.com/vbmacher</url>
+      <timezone>Europe/Prague</timezone>
+    </developer>
+  </developers>
+
+  <modules>
+    <module>cup-maven-plugin</module>
+    <module>java-cup</module>
+    <module>java-cup-runtime</module>
+  </modules>
 
   <profiles>
     <profile>
@@ -50,7 +68,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-source-plugin</artifactId>
-            <version>2.4</version>
             <executions>
               <execution>
                 <id>attach-sources</id>
@@ -63,10 +80,9 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>2.10.3</version>
             <configuration>
               <links>
-                <link>http://docs.oracle.com/javase/7/docs/api/</link>
+                <link>http://docs.oracle.com/javase/8/docs/api/</link>
               </links>
               <tags>
                 <tag>
@@ -98,7 +114,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.6</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
@@ -116,7 +131,6 @@
           <plugin>
             <groupId>org.sonatype.plugins</groupId>
             <artifactId>nexus-staging-maven-plugin</artifactId>
-            <version>1.6.3</version>
             <extensions>true</extensions>
             <configuration>
               <serverId>ossrh</serverId>
@@ -130,50 +144,85 @@
   </profiles>
 
   <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.3</version>
-        <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
-        </configuration>
-      </plugin>
-    </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.6</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>2.4</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.10.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>1.6</version>
+        </plugin>
+        <plugin>
+          <groupId>org.sonatype.plugins</groupId>
+          <artifactId>nexus-staging-maven-plugin</artifactId>
+          <version>1.6.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.3</version>
+          <configuration>
+            <source>${compiler.source}</source>
+            <target>${compiler.target}</target>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh</artifactId>
+        <version>2.6</version>
+      </extension>
+    </extensions>
   </build>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-plugin-api</artifactId>
-      <version>3.3.3</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-artifact</artifactId>
-      <type>jar</type>
-      <version>3.3.3</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-project</artifactId>
-      <version>2.2.1</version>
-    </dependency>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-plugin-api</artifactId>
+        <version>3.3.3</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-artifact</artifactId>
+        <type>jar</type>
+        <version>3.3.3</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-project</artifactId>
+        <version>2.2.1</version>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+        <scope>test</scope>
+      </dependency>
 
-    <dependency>
-      <groupId>nz.ac.waikato.cms.weka.thirdparty</groupId>
-      <artifactId>java-cup-11b</artifactId>
-      <version>2015.03.26</version>
-    </dependency>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+      <dependency>
+        <groupId>com.github.vbmacher</groupId>
+        <artifactId>java-cup</artifactId>
+        <version>11b</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <distributionManagement>
     <snapshotRepository>

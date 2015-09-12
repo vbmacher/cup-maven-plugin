@@ -211,6 +211,30 @@ public class GoalGenerate extends AbstractMojo implements CupParameters {
     private int staleMillis;
 
     /**
+     * Makes CUP generate xleft/xright handles for accessing Location objects for symbol start/end inside actions.
+     *
+     * @parameter default-value="false"
+     * @editable
+     */
+    private boolean locations;
+
+    /**
+     * Makes CUP generate generic actions that produce XMLElement-objects for any symbol, that is labeled by the CUP spec author.
+     *
+     * @parameter default-value="false"
+     * @editable
+     */
+    private boolean xmlActions;
+
+    /**
+     * This option goes one step further then `<xmlActions/>` by producing the full parse tree as XMLElement-tree.
+     *
+     * @parameter default-value="false"
+     * @editable
+     */
+    private boolean genericLabels;
+
+    /**
      * Executer the "generate" goal.
      *
      * @throws MojoExecutionException if any error occurs during parser generation
@@ -313,6 +337,15 @@ public class GoalGenerate extends AbstractMojo implements CupParameters {
         }
         if (noScanner) {
             params.add("-noscanner");
+        }
+        if (locations) {
+            params.add("-locations");
+        }
+        if (xmlActions) {
+            params.add("-xmlactions");
+        }
+        if (genericLabels) {
+            params.add("-genericlabels");
         }
         if (expectedConflicts > 0) {
             params.add("-expect");

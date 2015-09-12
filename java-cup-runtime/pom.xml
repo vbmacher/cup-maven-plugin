@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.github.vbmacher</groupId>
+    <artifactId>java-cup-parent</artifactId>
+    <version>1.0.1</version>
+  </parent>
+
+  <groupId>com.github.vbmacher</groupId>
+  <artifactId>java-cup-runtime</artifactId>
+  <version>11b</version>
+
+  <name>Java CUP Runtime Maven Package</name>
+  <description>Repackaged java-cup-11b-runtime.jar</description>
+
+  <licenses>
+    <license>
+      <name>CUP Parser Generator Copyright Notice, License, and Disclaimer</name>
+      <url>http://www2.cs.tum.edu/projects/cup/install.php</url>
+      <distribution>manual</distribution>
+      <comments>GPL-compatible open-source license</comments>
+    </license>
+  </licenses>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>target/unpacked</directory>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>prepare</id>
+            <phase>validate</phase>
+            <configuration>
+              <tasks>
+                <echo message="prepare phase" />
+                <unzip src="java-cup-11b-runtime.jar" dest="target/unpacked" />
+              </tasks>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
