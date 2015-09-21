@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-
-  <parent>
-    <groupId>com.github.vbmacher</groupId>
-    <artifactId>java-cup-parent</artifactId>
-    <version>1.0.1</version>
-  </parent>
 
   <groupId>com.github.vbmacher</groupId>
   <artifactId>java-cup</artifactId>
@@ -17,6 +12,23 @@
   <name>Java CUP Maven Package</name>
   <description>Repackaged java-cup-11b.jar</description>
 
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/vbmacher/cup-maven-plugin/issues</url>
+  </issueManagement>
+
+  <scm>
+    <url>https://github.com/vbmacher/cup-maven-plugin</url>
+  </scm>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <netbeans.hint.license>gpl20</netbeans.hint.license>
+    <gpg.keyname>9D040841</gpg.keyname>
+    <compiler.source>1.8</compiler.source>
+    <compiler.target>1.8</compiler.target>
+  </properties>
+
   <licenses>
     <license>
       <name>CUP Parser Generator Copyright Notice, License, and Disclaimer</name>
@@ -25,6 +37,101 @@
       <comments>GPL-compatible open-source license</comments>
     </license>
   </licenses>
+
+  <developers>
+    <developer>
+      <name>Peter Jakubčo</name>
+      <url>https://github.com/vbmacher</url>
+      <timezone>Europe/Prague</timezone>
+    </developer>
+  </developers>
+
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>2.4</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.10.3</version>
+            <configuration>
+              <links>
+                <link>http://docs.oracle.com/javase/8/docs/api/</link>
+              </links>
+              <tags>
+                <tag>
+                  <name>goal</name>
+                  <placement>a</placement>
+                  <head>Goal:</head>
+                </tag>
+                <tag>
+                  <name>requiresProject</name>
+                  <placement>a</placement>
+                  <head>Requires Project:</head>
+                </tag>
+                <tag>
+                  <name>phase</name>
+                  <placement>a</placement>
+                  <head>Phase:</head>
+                </tag>
+              </tags>
+            </configuration>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+                <configuration>
+                  <keyname>${gpg.keyname}</keyname>
+                  <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.3</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
   <build>
     <resources>
@@ -36,18 +143,27 @@
       </resource>
     </resources>
 
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh</artifactId>
+        <version>2.6</version>
+      </extension>
+    </extensions>
+
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.6</version>
         <executions>
           <execution>
             <id>prepare</id>
             <phase>validate</phase>
             <configuration>
               <tasks>
-                <echo message="prepare phase" />
-                <unzip src="java-cup-11b.jar" dest="target/unpacked" />
+                <echo message="prepare phase"/>
+                <unzip src="java-cup-11b.jar" dest="target/unpacked"/>
               </tasks>
             </configuration>
             <goals>
