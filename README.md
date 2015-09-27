@@ -1,6 +1,7 @@
 Java cup Maven plug-in
 ======================
 [![Build Status](https://travis-ci.org/vbmacher/cup-maven-plugin.png)](https://travis-ci.org/vbmacher/cup-maven-plugin)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.vbmacher/cup-maven-plugin/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.github.vbmacher/cup-maven-plugin)
 
 This project represents a plug-in acting as a wrapper for the [Java cup](http://www2.cs.tum.edu/projects/cup/) LR parser
 generator. I couldn't find any Maven 3 plug-in for this parser, so I created one.
@@ -37,16 +38,16 @@ Run-time library
 
 CUP-generated parsers need a runtime-library to run. There are no (reliable) third party bundles
 for latest CUP (version 11b), so I have repackaged original jars into Maven bundles.  
-    
+
 You can find the run-time library and also the engine in the subdirectories inside this repository.
 
 The run-time library version of Java CUP library must correspond to version which the plug-in is
 using for parser generation.
 
 Currently, the plug-in uses for generation [CUP version 0.11b](http://www2.cs.tum.edu/projects/cup/). 
-      
+
 In order to use it, you must add a dependency to your `pom.xml`:
-       
+
 ```
 <dependency>
   <groupId>com.github.vbmacher</groupId>
