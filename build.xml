@@ -1,0 +1,40 @@
+<project name="cup-maven-plugin" default="dist" basedir=".">
+  <description>
+    Build file for cup-maven-plugin
+  </description>
+
+  <condition property="isWindows">
+    <os family="windows" />
+  </condition>
+
+  <condition property="isUnix">
+    <os family="unix" />
+  </condition>
+
+  <target name="all" depends="mvn_windows, mvn_unix"/>
+
+  <target name="mvn_windows" if="isWindows">
+    <exec dir="java-cup" executable="cmd">
+        <arg line="/c mvn clean install" />
+    </exec>
+    <exec dir="java-cup-runtime" executable="cmd">
+        <arg line="/c mvn clean install" />
+    </exec>
+    <exec dir="cup-maven-plugin" executable="cmd">
+        <arg line="/c mvn clean install" />
+    </exec>
+  </target>
+
+  <target name="mvn_unix" if="isUnix">
+    <exec dir="java-cup" executable="sh">
+        <arg line="-c 'mvn clean install'" />
+    </exec>
+    <exec dir="java-cup-runtime" executable="sh">
+        <arg line="-c 'mvn clean install'" />
+    </exec>
+    <exec dir="cup-maven-plugin" executable="sh">
+        <arg line="-c 'mvn clean install'" />
+    </exec>
+  </target>
+
+</project>

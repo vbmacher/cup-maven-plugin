@@ -1,12 +1,13 @@
 language: java
-
 sudo: false
 
 jdk:
-- oraclejdk8
+  - oraclejdk8
 
 os:
-- linux
+  - linux
+
+script: ant all
 
 notifications:
   on_success: change
