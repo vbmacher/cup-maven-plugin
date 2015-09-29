@@ -11,6 +11,7 @@
 
   <name>Java CUP Runtime Maven Package</name>
   <description>Repackaged java-cup-11b-runtime.jar</description>
+  <url>https://github.com/vbmacher/cup-maven-plugin</url>
 
   <issueManagement>
     <system>GitHub</system>
