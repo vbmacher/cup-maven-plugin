@@ -10,6 +10,9 @@ generator.
 - `java-cup`; repackaged `java-cup-11b.jar` as Maven artifact
 - `java-cup-runtime`; repackaged `java-cup-11b-runtime.jar` as Maven artifact
 
+NOTE: This is not an "official" plug-in, it was developed without any communication with original
+      CUP authors.
+
 ## Copyright
 
 Java CUP Maven plug-in + repackaged jars projects: (c) Copyright 2012-2016, Peter Jakubčo
@@ -19,6 +22,7 @@ Java CUP Maven plug-in + repackaged jars projects: (c) Copyright 2012-2016, Pete
 ## License
 
 Java CUP Maven plug-in + repackaged jars: GPL v2.
+
 "CUP Parser Generator": GPL-Compatible. See http://www2.cs.tum.edu/projects/cup/install.php for more details.
 
 ## Usage
@@ -58,7 +62,7 @@ You can find the run-time library and also the engine in the subdirectories insi
 The run-time library version of Java CUP library must correspond to version which the plug-in is
 using for parser generation.
 
-Currently, the plug-in uses for generation [CUP version 0.11b](http://www2.cs.tum.edu/projects/cup/). 
+Currently, the plug-in uses [CUP](http://www2.cs.tum.edu/projects/cup/) version `11b-20151001`. 
 
 In order to use it, you must add a dependency to your `pom.xml`:
 
@@ -70,9 +74,9 @@ In order to use it, you must add a dependency to your `pom.xml`:
 </dependency>
 ```
 
-NOTE: There might be, however, [several libraries](https://maven-repository.com/search?q=cup) out there
-      that should do just that. You are not bound with this specific dependency, but you must take care about
-      the CUP version.
+NOTE: There might exist [several libraries](https://maven-repository.com/search?q=cup) out there
+      that should provide the CUP runtime library. You are not bound with this specific
+      dependency, but you must take care about the CUP version.
 
 ## Parameters in configuration
 
@@ -122,5 +126,3 @@ This project is not under active development. Time-to-time it is updated to wrap
 The best how you can contribute is to file issues if something is wrong, or just notify the author about newest CUP version if you need it.
 
 Ofcourse, if you find some bug and know how to fix it, pull requests are welcome.
-
-
