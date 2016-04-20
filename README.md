@@ -3,8 +3,24 @@ Java cup Maven plug-in
 [![Build Status](https://travis-ci.org/vbmacher/cup-maven-plugin.png)](https://travis-ci.org/vbmacher/cup-maven-plugin)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.vbmacher/cup-maven-plugin/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.github.vbmacher/cup-maven-plugin)
 
-This project represents a plug-in acting as a wrapper for the [Java cup](http://www2.cs.tum.edu/projects/cup/) LR parser
-generator. I couldn't find any Maven 3 plug-in for this parser, so I created one.
+This project includes three artifacts:
+
+- `cup-maven-plugin`; a Maven plug-in which wraps [Java cup](http://www2.cs.tum.edu/projects/cup/) parser
+generator.
+- `java-cup`; repackaged `java-cup-11b.jar` as Maven artifact
+- `java-cup-runtime`; repackaged `java-cup-11b-runtime.jar` as Maven artifact
+
+
+CUP Parser Generator original copyright
+---------------------------------------
+
+Copyright 1996-2015 by Scott Hudson, Frank Flannery, C. Scott Ananian, Michael Petter
+
+License
+-------
+
+GPL-Compatible. See http://www2.cs.tum.edu/projects/cup/install.php
+
 
 Usage
 -----
@@ -15,7 +31,7 @@ To do so, add the following to the plugins-section of your `pom.xml`.
 <plugin>
   <groupId>com.github.vbmacher</groupId>
   <artifactId>cup-maven-plugin</artifactId>
-  <version>1.0.1</version>
+  <version>11b-20151001</version>
   <executions>
     <execution>
       <goals>
@@ -52,7 +68,7 @@ In order to use it, you must add a dependency to your `pom.xml`:
 <dependency>
   <groupId>com.github.vbmacher</groupId>
   <artifactId>java-cup-runtime</artifactId>
-  <version>11b</version>
+  <version>11b-20151001</version>
 </dependency>
 ```
 

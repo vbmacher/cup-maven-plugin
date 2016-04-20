@@ -6,7 +6,7 @@
 
   <groupId>com.github.vbmacher</groupId>
   <artifactId>java-cup-runtime</artifactId>
-  <version>11b</version>
+  <version>11b-20151001</version>
   <packaging>jar</packaging>
 
   <name>Java CUP Runtime Maven Package</name>
@@ -26,8 +26,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <netbeans.hint.license>gpl20</netbeans.hint.license>
     <gpg.keyname>9D040841</gpg.keyname>
-    <compiler.source>1.8</compiler.source>
-    <compiler.target>1.8</compiler.target>
+    <srcfile>${project.artifactId}-${project.version}-sources.jar</srcfile>
+    <javadocfile>${project.artifactId}-${project.version}-javadoc.jar</javadocfile>
   </properties>
 
   <licenses>
@@ -52,54 +52,6 @@
       <id>release</id>
       <build>
         <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-            <version>2.4</version>
-            <executions>
-              <execution>
-                <id>attach-sources</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>2.10.3</version>
-            <configuration>
-              <links>
-                <link>http://docs.oracle.com/javase/8/docs/api/</link>
-              </links>
-              <tags>
-                <tag>
-                  <name>goal</name>
-                  <placement>a</placement>
-                  <head>Goal:</head>
-                </tag>
-                <tag>
-                  <name>requiresProject</name>
-                  <placement>a</placement>
-                  <head>Requires Project:</head>
-                </tag>
-                <tag>
-                  <name>phase</name>
-                  <placement>a</placement>
-                  <head>Phase:</head>
-                </tag>
-              </tags>
-            </configuration>
-            <executions>
-              <execution>
-                <id>attach-javadocs</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
@@ -156,16 +108,35 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.6</version>
+        <version>1.8</version>
         <executions>
           <execution>
             <id>prepare</id>
             <phase>validate</phase>
             <configuration>
-              <tasks>
+              <target>
                 <echo message="prepare phase"/>
                 <unzip src="java-cup-11b-runtime.jar" dest="target/unpacked"/>
-              </tasks>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>sources-and-javadoc</id>
+            <phase>package</phase>
+            <configuration>
+              <target>
+                <zip destfile="target/${srcfile}"
+                     basedir="."
+                     includes="java-cup-src-11b-20151001.tar.gz" />
+                <zip destfile="target/${javadocfile}"
+                     basedir="."
+                     includes="README.md" />
+                <attachartifact file="target/${srcfile}" classifier="sources" />
+                <attachartifact file="target/${javadocfile}" classifier="javadoc" />
+              </target>
             </configuration>
             <goals>
               <goal>run</goal>
