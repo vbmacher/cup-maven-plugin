@@ -13,6 +13,7 @@ generator.
 ## Copyright
 
 Java CUP Maven plug-in + repackaged jars projects: (c) Copyright 2012-2016, Peter Jakubčo
+
 "CUP Parser Generator": Copyright 1996-2015 by Scott Hudson, Frank Flannery, C. Scott Ananian, Michael Petter
 
 ## License
