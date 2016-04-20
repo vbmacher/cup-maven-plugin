@@ -1,29 +1,27 @@
-Java cup Maven plug-in
-======================
+# Java CUP Maven plug-in
+
 [![Build Status](https://travis-ci.org/vbmacher/cup-maven-plugin.png)](https://travis-ci.org/vbmacher/cup-maven-plugin)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.vbmacher/cup-maven-plugin/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.github.vbmacher/cup-maven-plugin)
 
 This project includes three artifacts:
 
-- `cup-maven-plugin`; a Maven plug-in which wraps [Java cup](http://www2.cs.tum.edu/projects/cup/) parser
+- `cup-maven-plugin`; a Maven plug-in which wraps [Java CUP](http://www2.cs.tum.edu/projects/cup/) parser
 generator.
 - `java-cup`; repackaged `java-cup-11b.jar` as Maven artifact
 - `java-cup-runtime`; repackaged `java-cup-11b-runtime.jar` as Maven artifact
 
+## Copyright
 
-CUP Parser Generator original copyright
----------------------------------------
+Java CUP Maven plug-in + repackaged jars projects: (c) Copyright 2012-2016, Peter Jakubčo
+"CUP Parser Generator": Copyright 1996-2015 by Scott Hudson, Frank Flannery, C. Scott Ananian, Michael Petter
 
-Copyright 1996-2015 by Scott Hudson, Frank Flannery, C. Scott Ananian, Michael Petter
+## License
 
-License
--------
+Java CUP Maven plug-in + repackaged jars: GPL v2.
+"CUP Parser Generator": GPL-Compatible. See http://www2.cs.tum.edu/projects/cup/install.php for more details.
 
-GPL-Compatible. See http://www2.cs.tum.edu/projects/cup/install.php
+## Usage
 
-
-Usage
------
 To use this plugin, you will have to tell Maven to execute the plugin at some point during the build process. 
 To do so, add the following to the plugins-section of your `pom.xml`.
 
@@ -49,8 +47,7 @@ To do so, add the following to the plugins-section of your `pom.xml`.
 By default the plugin is called during the generate-sources phase of the
 [build lifecycle](http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html).
 
-Run-time library
-----------------
+## Run-time library
 
 CUP-generated parsers need a runtime-library to run. There are no (reliable) third party bundles
 for latest CUP (version 11b), so I have repackaged original jars into Maven bundles.  
@@ -76,11 +73,10 @@ NOTE: There might be, however, [several libraries](https://maven-repository.com/
       that should do just that. You are not bound with this specific dependency, but you must take care about
       the CUP version.
 
-Parameters in configuration
----------------------------
+## Parameters in configuration
 
 The plug-in accepts many input parameters. Each parameter is passed inside the `<configuration>` element.
-Most of the parameters are just forwarded to Java cup parser.
+Most of the parameters are just forwarded to the original CUP parser generator.
 
 Plugin-specific parameters:
 
@@ -118,4 +114,12 @@ CUP-specific parameters:
 * `<xmlActions>false</xmlActions>` - Makes CUP generate generic actions that produce XMLElement-objects for any symbol, that is labeled by the CUP spec author.
 * `<genericLabels>false</genericLabels>` - This option goes one step further then `<xmlActions/>` by producing the full parse
                                            tree as XMLElement-tree.
+
+## Contributing
+
+This project is not under active development. Time-to-time it is updated to wrap newest CUP, but checking for new version is not done often and regularly.
+The best how you can contribute is to file issues if something is wrong, or just notify the author about newest CUP version if you need it.
+
+Ofcourse, if you find some bug and know how to fix it, pull requests are welcome.
+
 
