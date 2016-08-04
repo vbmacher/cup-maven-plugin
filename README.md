@@ -21,9 +21,9 @@ Java CUP Maven plug-in + repackaged jars projects: (c) Copyright 2012-2016, Pete
 
 ## License
 
-Java CUP Maven plug-in: GPL v2.
-Repackaged jars: GPL-Compatible. See http://www2.cs.tum.edu/projects/cup/licence.html for more details.
-"CUP Parser Generator": GPL-Compatible. See http://www2.cs.tum.edu/projects/cup/licence.html for more details.
+- Java CUP Maven plug-in: GPL v2.
+- Repackaged jars: GPL-Compatible. See http://www2.cs.tum.edu/projects/cup/licence.html for more details.
+- CUP Parser Generator": GPL-Compatible. See http://www2.cs.tum.edu/projects/cup/licence.html for more details.
 
 ## Usage
 
