@@ -24,7 +24,6 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <netbeans.hint.license>gpl20</netbeans.hint.license>
     <gpg.keyname>9D040841</gpg.keyname>
     <srcfile>${project.artifactId}-${project.version}-sources.jar</srcfile>
     <javadocfile>${project.artifactId}-${project.version}-javadoc.jar</javadocfile>
