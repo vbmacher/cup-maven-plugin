@@ -34,7 +34,7 @@ To do so, add the following to the plugins-section of your `pom.xml`.
 <plugin>
   <groupId>com.github.vbmacher</groupId>
   <artifactId>cup-maven-plugin</artifactId>
-  <version>11b-20151001</version>
+  <version>11b-20160615</version>
   <executions>
     <execution>
       <goals>
@@ -55,14 +55,14 @@ By default the plugin is called during the generate-sources phase of the
 ## Run-time library
 
 CUP-generated parsers need a runtime-library to run. There are no (reliable) third party bundles
-for latest CUP (version 11b), so I have repackaged original jars into Maven bundles.  
+for latest CUP (version 11b), so I have repackaged original jars into Maven bundles.
 
 You can find the run-time library and also the engine in the subdirectories inside this repository.
 
 The run-time library version of Java CUP library must correspond to version which the plug-in is
 using for parser generation.
 
-Currently, the plug-in uses [CUP](http://www2.cs.tum.edu/projects/cup/) version `11b-20151001`. 
+Currently, the plug-in uses [CUP](http://www2.cs.tum.edu/projects/cup/) version `11b-20160615`.
 
 In order to use it, you must add a dependency to your `pom.xml`:
 
@@ -70,7 +70,7 @@ In order to use it, you must add a dependency to your `pom.xml`:
 <dependency>
   <groupId>com.github.vbmacher</groupId>
   <artifactId>java-cup-runtime</artifactId>
-  <version>11b-20151001</version>
+  <version>11b-20160615</version>
 </dependency>
 ```
 

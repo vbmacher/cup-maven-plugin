@@ -12,7 +12,7 @@ http://www2.cs.tum.edu/projects/cup/docs.php
 
 # CUP Parser Generator Copyright
 
-Copyright 1996-2015 by Scott Hudson, Frank Flannery, C. Scott Ananian, Michael Petter
+Copyright 1996-2016 by Scott Hudson, Frank Flannery, C. Scott Ananian, Michael Petter
 
 # CUP Parser Generator License
 
