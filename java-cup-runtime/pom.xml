@@ -6,7 +6,7 @@
 
   <groupId>com.github.vbmacher</groupId>
   <artifactId>java-cup-runtime</artifactId>
-  <version>11b-20151001</version>
+  <version>11b-20160615</version>
   <packaging>jar</packaging>
 
   <name>Java CUP Runtime Maven Package</name>
@@ -129,7 +129,7 @@
               <target>
                 <zip destfile="target/${srcfile}"
                      basedir="."
-                     includes="java-cup-src-11b-20151001.tar.gz" />
+                     includes="java-cup-src-11b-20160615.tar.gz" />
                 <zip destfile="target/${javadocfile}"
                      basedir="."
                      includes="README.md" />

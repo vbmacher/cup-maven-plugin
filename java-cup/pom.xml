@@ -6,11 +6,11 @@
 
   <groupId>com.github.vbmacher</groupId>
   <artifactId>java-cup</artifactId>
-  <version>11b-20151001</version>
+  <version>11b-20160615</version>
   <packaging>jar</packaging>
 
   <name>Java CUP Maven Package</name>
-  <description>Repackaged java-cup-11b.jar</description>
+  <description>Repackaged java-cup-11.jar</description>
   <url>https://github.com/vbmacher/cup-maven-plugin</url>
 
   <issueManagement>
@@ -115,7 +115,7 @@
             <configuration>
               <target>
                 <echo message="prepare phase"/>
-                <unzip src="java-cup-11b.jar" dest="target/unpacked"/>
+                <unzip src="java-cup-11.jar" dest="target/unpacked"/>
               </target>
             </configuration>
             <goals>
@@ -129,7 +129,7 @@
               <target>
                 <zip destfile="target/${srcfile}"
                      basedir="."
-                     includes="java-cup-src-11b-20151001.tar.gz" />
+                     includes="java-cup-src-11b-20160615.tar.gz" />
                 <zip destfile="target/${javadocfile}"
                      basedir="."
                      includes="README.md" />
