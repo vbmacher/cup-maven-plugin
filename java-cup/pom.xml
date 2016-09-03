@@ -115,7 +115,7 @@
             <configuration>
               <target>
                 <echo message="prepare phase"/>
-                <unzip src="java-cup-11.jar" dest="target/unpacked"/>
+                <unzip src="java-cup-11b.jar" dest="target/unpacked"/>
               </target>
             </configuration>
             <goals>
