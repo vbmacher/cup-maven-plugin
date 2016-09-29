@@ -40,8 +40,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <netbeans.hint.license>gpl20</netbeans.hint.license>
     <gpg.keyname>9D040841</gpg.keyname>
-    <compiler.source>1.8</compiler.source>
-    <compiler.target>1.8</compiler.target>
+    <compiler.source>1.7</compiler.source>
+    <compiler.target>1.7</compiler.target>
   </properties>
 
   <profiles>

@@ -82,7 +82,7 @@ public class GoalGenerate extends AbstractMojo implements CupParameters {
     private File outputDirectory;
 
     /**
-     * @parameter property="project"
+     * @parameter default-value="${project}"
      * @required
      */
     private MavenProject project;
