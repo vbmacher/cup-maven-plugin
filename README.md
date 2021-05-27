@@ -17,7 +17,7 @@ NOTE: This is not an "official" plug-in, it was developed without any communicat
 
 ## Copyright
 
-Java CUP Maven plug-in + repackaged jars projects: (c) Copyright 2012-2016, Peter Jakubčo
+Java CUP Maven plug-in + repackaged jars projects: (c) Copyright 2012-2021, Peter Jakubčo
 
 "CUP Parser Generator": Copyright 1996-2015 by Scott Hudson, Frank Flannery, C. Scott Ananian, Michael Petter
 
@@ -36,7 +36,7 @@ To do so, add the following to the plugins-section of your `pom.xml`.
 <plugin>
   <groupId>com.github.vbmacher</groupId>
   <artifactId>cup-maven-plugin</artifactId>
-  <version>11b-20160615</version>
+  <version>11b-20160615-1</version>
   <executions>
     <execution>
       <goals>
@@ -72,7 +72,7 @@ In order to use it, you must add a dependency to your `pom.xml`:
 <dependency>
   <groupId>com.github.vbmacher</groupId>
   <artifactId>java-cup-runtime</artifactId>
-  <version>11b-20160615</version>
+  <version>11b-20160615-1</version>
 </dependency>
 ```
 
