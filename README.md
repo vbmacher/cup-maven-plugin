@@ -1,6 +1,6 @@
 # Java CUP Maven plug-in
 
-[![Build Status](https://travis-ci.org/vbmacher/cup-maven-plugin.png)](https://travis-ci.org/vbmacher/cup-maven-plugin)
+[![Build Status](https://travis-ci.com/vbmacher/cup-maven-plugin.png)](https://travis-ci.com/vbmacher/cup-maven-plugin)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.vbmacher/cup-maven-plugin/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.github.vbmacher/cup-maven-plugin)
 
 <a href="https://www.buymeacoffee.com/vbmacher" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
