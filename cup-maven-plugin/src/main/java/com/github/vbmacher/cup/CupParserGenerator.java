@@ -49,7 +49,7 @@ public class CupParserGenerator {
         @Override
         public boolean accept(Path entry) throws IOException {
             File file = entry.toFile();
-            return file.isFile() && file.getName().toUpperCase().endsWith(".cup");
+            return file.isFile() && file.getName().toLowerCase().endsWith(".cup");
         }
     }
 
