@@ -8,9 +8,3 @@ os:
   - linux
 
 script: ant all
-
-notifications:
-  on_success: change
-  on_failure: always
-  template:
-  - "%{repository} (%{branch}:%{commit} by %{author}): %{message} (%{build_url})"
