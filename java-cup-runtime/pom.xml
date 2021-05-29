@@ -6,7 +6,7 @@
 
   <groupId>com.github.vbmacher</groupId>
   <artifactId>java-cup-runtime</artifactId>
-  <version>11b-20160615</version>
+  <version>11b-20160615-1</version>
   <packaging>jar</packaging>
 
   <name>Java CUP Runtime Maven Package</name>
@@ -76,7 +76,7 @@
             <extensions>true</extensions>
             <configuration>
               <serverId>ossrh</serverId>
-              <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
               <autoReleaseAfterClose>true</autoReleaseAfterClose>
             </configuration>
           </plugin>
