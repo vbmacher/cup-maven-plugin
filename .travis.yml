@@ -2,15 +2,10 @@ language: java
 sudo: false
 
 jdk:
-  - oraclejdk8
+  - openjdk8
 
-os:
-  - linux
+cache:
+  directories:
+    - $HOME/.m2
 
 script: ant all
-
-notifications:
-  on_success: change
-  on_failure: always
-  template:
-  - "%{repository} (%{branch}:%{commit} by %{author}): %{message} (%{build_url})"

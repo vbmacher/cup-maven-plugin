@@ -2,148 +2,158 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.github.vbmacher</groupId>
-  <artifactId>java-cup</artifactId>
-  <version>11b-20160615</version>
-  <packaging>jar</packaging>
+    <groupId>com.github.vbmacher</groupId>
+    <artifactId>java-cup</artifactId>
+    <version>11b-20160615-1</version>
+    <packaging>jar</packaging>
 
-  <name>Java CUP Maven Package</name>
-  <description>Repackaged java-cup-11.jar</description>
-  <url>https://github.com/vbmacher/cup-maven-plugin</url>
-
-  <issueManagement>
-    <system>GitHub</system>
-    <url>https://github.com/vbmacher/cup-maven-plugin/issues</url>
-  </issueManagement>
-
-  <scm>
+    <name>Java CUP Maven Package</name>
+    <description>Repackaged java-cup-11.jar</description>
     <url>https://github.com/vbmacher/cup-maven-plugin</url>
-  </scm>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <gpg.keyname>9D040841</gpg.keyname>
-    <srcfile>${project.artifactId}-${project.version}-sources.jar</srcfile>
-    <javadocfile>${project.artifactId}-${project.version}-javadoc.jar</javadocfile>
-  </properties>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/vbmacher/cup-maven-plugin/issues</url>
+    </issueManagement>
 
-  <licenses>
-    <license>
-      <name>CUP Parser Generator Copyright Notice, License, and Disclaimer</name>
-      <url>http://www2.cs.tum.edu/projects/cup/install.php</url>
-      <distribution>manual</distribution>
-      <comments>GPL-compatible open-source license</comments>
-    </license>
-  </licenses>
+    <scm>
+        <url>https://github.com/vbmacher/cup-maven-plugin</url>
+    </scm>
 
-  <developers>
-    <developer>
-      <name>Peter Jakubčo</name>
-      <url>https://github.com/vbmacher</url>
-      <timezone>Europe/Prague</timezone>
-    </developer>
-  </developers>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <gpg.keyname>9D040841</gpg.keyname>
+        <srcfile>${project.artifactId}-${project.version}-sources.jar</srcfile>
+        <javadocfile>${project.artifactId}-${project.version}-javadoc.jar</javadocfile>
+    </properties>
 
-  <profiles>
-    <profile>
-      <id>release</id>
-      <build>
+    <licenses>
+        <license>
+            <name>CUP Parser Generator Copyright Notice, License, and Disclaimer</name>
+            <url>http://www2.cs.tum.edu/projects/cup/install.php</url>
+            <distribution>manual</distribution>
+            <comments>GPL-compatible open-source license</comments>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Peter Jakubčo</name>
+            <url>https://github.com/vbmacher</url>
+            <timezone>Europe/Prague</timezone>
+        </developer>
+    </developers>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.0.1</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <keyname>${gpg.keyname}</keyname>
+                                    <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.8</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>target/unpacked</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-http</artifactId>
+                <version>3.4.3</version>
+            </extension>
+        </extensions>
+
         <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.6</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-                <configuration>
-                  <keyname>${gpg.keyname}</keyname>
-                  <passphraseServerId>${gpg.keyname}</passphraseServerId>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.sonatype.plugins</groupId>
-            <artifactId>nexus-staging-maven-plugin</artifactId>
-            <version>1.6.3</version>
-            <extensions>true</extensions>
-            <configuration>
-              <serverId>ossrh</serverId>
-              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-              <autoReleaseAfterClose>true</autoReleaseAfterClose>
-            </configuration>
-          </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>prepare</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <target>
+                                <echo message="prepare phase"/>
+                                <unzip src="java-cup-11b.jar" dest="target/unpacked"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>sources-and-javadoc</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <target>
+                                <zip destfile="target/${srcfile}"
+                                     basedir="."
+                                     includes="java-cup-src-11b-20160615.tar.gz"/>
+                                <zip destfile="target/${javadocfile}"
+                                     basedir="."
+                                     includes="README.md"/>
+                                <attachartifact file="target/${srcfile}" classifier="sources"/>
+                                <attachartifact file="target/${javadocfile}" classifier="javadoc"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
-      </build>
-    </profile>
-  </profiles>
-
-  <build>
-    <resources>
-      <resource>
-        <directory>target/unpacked</directory>
-        <includes>
-          <include>**/*</include>
-        </includes>
-      </resource>
-    </resources>
-
-    <extensions>
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-        <artifactId>wagon-ssh</artifactId>
-        <version>2.6</version>
-      </extension>
-    </extensions>
-
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.8</version>
-        <executions>
-          <execution>
-            <id>prepare</id>
-            <phase>validate</phase>
-            <configuration>
-              <target>
-                <echo message="prepare phase"/>
-                <unzip src="java-cup-11b.jar" dest="target/unpacked"/>
-              </target>
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>sources-and-javadoc</id>
-            <phase>package</phase>
-            <configuration>
-              <target>
-                <zip destfile="target/${srcfile}"
-                     basedir="."
-                     includes="java-cup-src-11b-20160615.tar.gz" />
-                <zip destfile="target/${javadocfile}"
-                     basedir="."
-                     includes="README.md" />
-                <attachartifact file="target/${srcfile}" classifier="sources" />
-                <attachartifact file="target/${javadocfile}" classifier="javadoc" />
-              </target>
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+    </build>
 
 </project>

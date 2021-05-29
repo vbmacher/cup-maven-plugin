@@ -76,7 +76,7 @@ public class GoalGenerate extends AbstractMojo implements CupParameters {
     /**
      * Name of the directory into which cup should generate the parser.
      *
-     * @parameter expression="${project.build.directory}/generated-sources/cup"
+     * @parameter property="${project.build.directory}/generated-sources/cup"
      * @editable
      */
     private File outputDirectory;
