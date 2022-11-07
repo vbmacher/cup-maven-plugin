@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012-2016, Peter Jakubčo
+ * Copyright (c) 2012-2022, Peter Jakubčo
  *
  * KISS, DRY, YAGNI
  *
