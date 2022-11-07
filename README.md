@@ -76,7 +76,7 @@ In order to use it, you must add a dependency to your `pom.xml`:
 </dependency>
 ```
 
-NOTE: There might exist [several libraries](https://maven-repository.com/search?q=cup) out there
+NOTE: There might exist [several libraries](https://search.maven.org/search?q=cup) out there
       that should provide the CUP runtime library. You are not bound with this specific
       dependency, but you must take care about the CUP version.
 
