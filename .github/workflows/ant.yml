@@ -1,0 +1,18 @@
+name: CUP Maven Plugin
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v3
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+    - name: Build with Ant
+      run: ant -noinput -buildfile build.xml all
