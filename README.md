@@ -102,13 +102,13 @@ CUP-specific parameters:
 * `<symbolsInterface>true</symbolsInterface>` - A flag whether to output the symbol constant code as an interface rather
                                                 than as a class.
 * `<typeArgs></typeArgs>` - Specify type arguments for parser class. By default, it is empty.
-* `<nontermsToSymbols>false</nontermsToSymbols>` - Put non terminals in symbol constant class.
+* `<nontermsToSymbols>false</nontermsToSymbols>` - Put non-terminals in symbol constant class.
 * `<expectedConflicts>0</expectedConflicts>` - Number of conflicts expected/allowed.
 * `<compactRed>false</compactRed>` - Compact tables by defaulting to most frequent reduce.
 * `<noWarn>false</noWarn>` - Don't warn about useless productions, etc.
 * `<noSummary>true</noSummary>` - Don't print the usual summary of parse states, etc.
 * `<progress>false</progress>` - Print messages to indicate progress of the system.
-* `<dumpGrammar>false</dumpGrammar>` - Produce a human readable dump of the symbols and grammar.
+* `<dumpGrammar>false</dumpGrammar>` - Produce a human-readable dump of the symbols and grammar.
 * `<dumpStates>false</dumpStates>` - Produce a dump of parse state machine.
 * `<dumpTables>false</dumpTables>` - Produce a dump of the parse tables.
 * `<time>false</time>` - Print time usage summary.
