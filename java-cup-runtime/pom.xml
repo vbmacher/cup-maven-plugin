@@ -144,6 +144,36 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>org.moditect</groupId>
+        <artifactId>moditect-maven-plugin</artifactId>
+        <version>1.0.0.Final</version>
+        <executions>
+          <execution>
+            <id>add-module-info</id>
+            <phase>package</phase>
+            <goals>
+              <goal>add-module-info</goal>
+            </goals>
+            <configuration>
+              <failOnWarning>false</failOnWarning>
+              <outputDirectory>${project.build.directory}</outputDirectory>
+              <overwriteExistingFiles>true</overwriteExistingFiles>
+              <modules>
+                <module>
+                  <file>target/java-cup-runtime-${project.version}.jar</file>
+                  <moduleInfoSource>
+                    module com.github.vbmacher.java_cup.runtime {
+                      requires java.xml;
+                      exports java_cup.runtime;
+                    }
+                  </moduleInfoSource>
+                </module>
+              </modules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <version>3.3.0</version>
