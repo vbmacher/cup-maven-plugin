@@ -6,11 +6,11 @@
 
     <groupId>com.github.vbmacher</groupId>
     <artifactId>java-cup</artifactId>
-    <version>11b-20160615-2</version>
+    <version>11b-20160615-3</version>
     <packaging>jar</packaging>
 
     <name>Java CUP Maven Package</name>
-    <description>Repackaged java-cup-11.jar</description>
+    <description>Repackaged java-cup-11b.jar</description>
     <url>https://github.com/vbmacher/cup-maven-plugin</url>
 
     <issueManagement>
@@ -54,7 +54,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.0.1</version>
+                        <version>3.1.0</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -72,7 +72,7 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.8</version>
+                        <version>1.6.13</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>ossrh</serverId>
@@ -99,7 +99,7 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-http</artifactId>
-                <version>3.5.2</version>
+                <version>3.5.3</version>
             </extension>
         </extensions>
 
