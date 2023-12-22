@@ -21,6 +21,9 @@ package com.github.vbmacher.cup;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
 import java.io.File;
@@ -29,21 +32,17 @@ import java.util.List;
 
 /**
  * Goal which generates java files from cup files.
- *
- * @goal generate
- * @requiresProject true
- * @phase generate-sources
  */
+@SuppressWarnings("unused")
+@Mojo(name = "generate", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
 public class GoalGenerate extends AbstractMojo implements CupParameters {
     public static final String DEFAULT_CUP_DIR = "src/main/cup";
 
     /**
      * A flag whether to output the symbol constant code as an interface rather
      * than as a class.
-     *
-     * @parameter default-value="true"
-     * @editable
      */
+    @Parameter(defaultValue = "true")
     private boolean symbolsInterface;
 
     /**
@@ -51,189 +50,145 @@ public class GoalGenerate extends AbstractMojo implements CupParameters {
      * <p/>
      * By default, a `parser.cup` file in <code>src/main/cup</code> will be
      * processed.
-     *
-     * @parameter
-     * @editable
      */
+    @Parameter
     private File cupDefinition;
 
     /**
      * Parser class name.
-     *
-     * @parameter default-value="parser"
-     * @editable
      */
+    @Parameter(defaultValue = "parser")
     private String className;
 
     /**
      * Symbol class name.
-     *
-     * @parameter default-value="sym"
-     * @editable
      */
+    @Parameter(defaultValue = "sym")
     private String symbolsName;
 
     /**
      * Name of the directory into which cup should generate the parser.
-     *
-     * @parameter property="${project.build.directory}/generated-sources/cup"
-     * @editable
      */
+    @Parameter(defaultValue = "${project.build.directory}/generated-sources/cup")
     private File outputDirectory;
 
     /**
-     * @parameter property="project"
-     * @required
+     * Maven project
      */
+    @Parameter(property = "project", readonly = true, required = true)
     private MavenProject project;
 
     /**
      * Package name.
-     *
-     * @parameter
-     * @editable
      */
+    @Parameter
     private String packageName;
 
     /**
-     * Produce a human readable dump of the symbols and grammar.
-     *
-     * @parameter default-value="false"
-     * @editable
+     * Produce a human-readable dump of the symbols and grammar.
      */
+    @Parameter(defaultValue = "false")
     private boolean dumpGrammar;
 
     /**
      * Produce a dump of parse state machine
-     *
-     * @parameter default-value="false"
-     * @editable
      */
+    @Parameter(defaultValue = "false")
     private boolean dumpStates;
 
     /**
      * Produce a dump of the parse tables
-     *
-     * @parameter default-value="false"
-     * @editable
      */
+    @Parameter(defaultValue = "false")
     private boolean dumpTables;
 
     /**
      * Print time usage summary
-     *
-     * @parameter default-value="false"
-     * @editable
      */
+    @Parameter(defaultValue = "false")
     private boolean time;
 
     /**
      * Print messages to indicate progress of the system
-     *
-     * @parameter default-value="false"
-     * @editable
      */
+    @Parameter(defaultValue = "false")
     private boolean progress;
 
     /**
      * Don't refer to java_cup.runtime.Scanner
-     *
-     * @parameter default-value="false"
-     * @editable
      */
+    @Parameter(defaultValue = "false")
     private boolean noScanner;
 
     /**
      * Don't propagate the left and right token position values
-     *
-     * @parameter default-value="false"
-     * @editable
      */
+    @Parameter(defaultValue = "false")
     private boolean noPositions;
 
     /**
      * Don't print the usual summary of parse states, etc.
-     *
-     * @parameter default-value="true"
-     * @editable
      */
+    @Parameter(defaultValue = "true")
     private boolean noSummary;
 
     /**
      * Don't warn about useless productions, etc.
-     *
-     * @parameter default-value="false"
-     * @editable
      */
+    @Parameter(defaultValue = "false")
     private boolean noWarn;
 
     /**
      * Compact tables by defaulting to most frequent reduce
-     *
-     * @parameter default-value="false"
-     * @editable
      */
+    @Parameter(defaultValue = "false")
     private boolean compactRed;
 
     /**
      * Number of conflicts expected/allowed
-     *
-     * @parameter default-value="0"
-     * @editable
      */
+    @Parameter(defaultValue = "0")
     private int expectedConflicts;
 
     /**
-     * Put non terminals in symbol constant class
-     *
-     * @parameter default-value="false"
-     * @editable
+     * Put non-terminals in symbol constant class
      */
+    @Parameter(defaultValue = "false")
     private boolean nontermsToSymbols;
 
     /**
      * Specify type arguments for parser class
-     *
-     * @parameter
-     * @editable
      */
+    @Parameter
     private String typeArgs;
 
     /**
      * The granularity in milliseconds of the last modification date for testing
      * whether a source needs regeneration.
-     *
-     * @parameter property="lastModGranularityMs"
-     * @editable
      */
+    @Parameter(property = "lastModGranularityMs")
     private int staleMillis;
 
     /**
      * Makes CUP generate xleft/xright handles for accessing Location objects for symbol start/end inside actions.
-     *
-     * @parameter default-value="false"
-     * @editable
      */
+    @Parameter(defaultValue = "false")
     private boolean locations;
 
     /**
      * Makes CUP generate generic actions that produce XMLElement-objects for any symbol, that is labeled by the CUP spec author.
-     *
-     * @parameter default-value="false"
-     * @editable
      */
+    @Parameter(defaultValue = "false")
     private boolean xmlActions;
 
     /**
      * This option goes one step further then `<xmlActions/>` by producing the full parse tree as XMLElement-tree.
-     *
-     * @parameter default-value="false"
-     * @editable
      */
+    @Parameter(defaultValue = "false")
     private boolean genericLabels;
 
     /**
-     * Executer the "generate" goal.
+     * Executes the "generate" goal.
      *
      * @throws MojoExecutionException if any error occurs during parser generation
      */
