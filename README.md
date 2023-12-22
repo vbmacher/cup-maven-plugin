@@ -15,7 +15,7 @@ NOTE: This is not an "official" plug-in, it was developed without any communicat
 
 ## Copyright
 
-Java CUP Maven plug-in + repackaged jars projects: (c) Copyright 2012-2022, Peter Jakubčo
+Java CUP Maven plug-in + repackaged jars projects: (c) Copyright 2012-2023, Peter Jakubčo
 
 "CUP Parser Generator": Copyright 1996-2015 by Scott Hudson, Frank Flannery, C. Scott Ananian, Michael Petter
 
@@ -34,7 +34,7 @@ To do so, add the following to the plugins-section of your `pom.xml`.
 <plugin>
   <groupId>com.github.vbmacher</groupId>
   <artifactId>cup-maven-plugin</artifactId>
-  <version>11b-20160615-2</version>
+  <version>11b-20160615-3</version>
   <executions>
     <execution>
       <goals>
@@ -70,7 +70,7 @@ In order to use it, you must add a dependency to your `pom.xml`:
 <dependency>
   <groupId>com.github.vbmacher</groupId>
   <artifactId>java-cup-runtime</artifactId>
-  <version>11b-20160615-2</version>
+  <version>11b-20160615-3</version>
 </dependency>
 ```
 
@@ -85,7 +85,7 @@ Most of the parameters are just forwarded to the original CUP parser generator.
 
 Plugin-specific parameters:
 
-* `<backup>false</backup>` - A flag whether to enable the generation of a backup copy, if the generated source file already exists. By default it is set
+* `<backup>false</backup>` - A flag whether to enable the generation of a backup copy, if the generated source file already exists. By default, it is set
   to false.
 * `<cupDefinition>parser.cup</cupDefinition>` - Grammar definition to run the cup parser generator on. By default, a `parser.cup` file in
   `src/main/cup` will be processed.
@@ -123,6 +123,6 @@ CUP-specific parameters:
 ## Contributing
 
 This project is not under active development. Time-to-time it is updated to wrap newest CUP, but checking for new version is not done often and regularly.
-The best how you can contribute is to file issues if something is wrong, or just notify the author about newest CUP version if you need it.
+The best how you can contribute is to file issues if something is wrong, or just notify the author about the newest CUP version if you need it.
 
 Ofcourse, if you find some bug and know how to fix it, pull requests are welcome.
